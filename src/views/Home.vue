@@ -1,18 +1,39 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container-fluid">
+    <h1>¡Bienvenido a Valhalla!</h1>
+      <logo-atom></logo-atom>
+      <h3>Accede a tu app</h3>
+      <router-link to="/login" v-if="!loggedIn">
+          Ingresar
+      </router-link>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { authComputed } from '../store/helpers'
+import LogoAtom from '../components/LogoAtom'
 export default {
-  name: 'Home',
   components: {
-    HelloWorld
+    LogoAtom
+  },
+  computed: {
+    ...authComputed
   }
 }
 </script>
+<style scoped lang="scss">
+  div {
+     display: grid;
+      display: flex;
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap:1rem;
+      flex-direction: column;
+      align-items:center;
+      justify-items: center;
+  }
+  h1,h3 {
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+  }
+</style>

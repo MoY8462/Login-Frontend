@@ -1,32 +1,47 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <router-link class="button" to="/">
+          Home
+    </router-link>
+    <router-link v-if="!loggedIn" to="/login" class="button">
+    Ingresar
+    </router-link>
+    <!--<button-atom buttonText="Salir" v-else @click="logout" type="button"></button-atom>-->
+    <button v-else @click="logout" type="button">Salir</button>
     <router-view/>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import { authComputed } from './store/helpers'
+//import ButtonAtom from '@/components/ButtonAtom.vue'
+export default {
+  //components: { ButtonAtom},
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
     }
+  },
+  computed: {
+    ...authComputed
   }
 }
+</script>
+
+<style scoped lang="scss">
+button,
+.button {
+  margin-left: auto;
+  background: rgb(44, 221, 138);
+  text-decoration: none;
+  color: #2c3e50;
+
+  &.router-link-active {
+    color: #2c3e50;
+  }
+}
+
+.logoutButton {
+  cursor: pointer;
+}
+
 </style>
