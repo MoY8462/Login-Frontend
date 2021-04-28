@@ -1,3 +1,37 @@
 $green: #5DD39E;
+$hover: #52B388;
 $font: 'Inter', sans-serif;
  
+@mixin button_style {
+    background-color: $green;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 0.5rem 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-family: $font;
+    transition-duration: 0.2s;
+    width:8rem;
+    height:2.6rem;
+}
+
+@mixin number_colums ($col, $fr) {
+    display: grid;
+    grid-template-columns: repeat($col, $fr);
+    grid-gap:1rem;
+}
+
+@mixin alig_elements ($aItem,$jItem,$fDirection) {
+    display: flex;
+    align-items:$aItem;
+    justify-items: $jItem;
+    flex-direction: $fDirection;
+}
+
+@mixin img_ ($width,$height) {
+    width: $width;
+    height: $height;
+}

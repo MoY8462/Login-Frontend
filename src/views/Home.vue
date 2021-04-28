@@ -1,12 +1,9 @@
-<template>
-  <div class="container-fluid">
-    <h1>¡Bienvenido a Valhalla!</h1>
-      <logo-atom></logo-atom>
-      <h3>Accede a tu app</h3>
-      <router-link to="/login" v-if="!loggedIn">
-          Ingresar
-      </router-link>
-  </div>
+<template lang='pug'>
+  div(class="container-fluid")
+      h1 ¡Bienvenido a Valhalla!
+      logo-atom
+      h3 Accede a tu app
+      router-link(to="/login" v-if="!loggedIn") Ingresar
 </template>
 
 <script>
@@ -23,13 +20,8 @@ export default {
 </script>
 <style scoped lang="scss">
   div {
-     display: grid;
-      display: flex;
-      grid-template-columns: repeat(1, 1fr);
-      grid-gap:1rem;
-      flex-direction: column;
-      align-items:center;
-      justify-items: center;
+      @include alig_elements (center,center,column);
+      @include number_colums (1, 1fr);
   }
   h1,h3 {
     padding: 0px;
