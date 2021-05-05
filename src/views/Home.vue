@@ -1,20 +1,16 @@
 <template lang='pug'>
-  div(class="container-fluid")
+  div
       h1 ¡Bienvenido a Valhalla!
       logo-atom
       h3 Accede a tu app
-      router-link(to="/login" v-if="!loggedIn") Ingresar
+      router-link(to="/login") Ingresar
 </template>
 
 <script>
-import { authComputed } from '../store/helpers'
 import LogoAtom from '../components/LogoAtom'
 export default {
   components: {
     LogoAtom
-  },
-  computed: {
-    ...authComputed
   }
 }
 </script>

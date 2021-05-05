@@ -1,12 +1,13 @@
 <template>
-  <button type="button" name="button">{{ buttonText }}</button>
+  <button type="button" name="button" @click={actionOn}>{{ buttonText }}</button>
 </template>
 
 <script>
 export default {
     name: 'ButtonAtom',
     props: {
-      buttonText: { type : String, default:""}
+      buttonText: { type : String, default:""},
+      actionOn: String
     }
 }
 </script>

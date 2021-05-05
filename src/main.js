@@ -6,19 +6,6 @@ import firebase from 'firebase'
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  created() {
-    const userString = localStorage.getItem('user')
-    if (userString) {
-      const userData = JSON.parse(userString)
-      this.$store.commit('SET_USER_DATA', userData)
-    }
-  },
-  render: function (h) { return h(App) }
-}).$mount('#app')
-
 const firebaseConfig = {
   apiKey: "AIzaSyAZY22wd4QnXBXldWjLJTUoMu24LRct9xo",
   authDomain: "valhalla-a358f.firebaseapp.com",
@@ -29,3 +16,11 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+firebase.auth().onAuthStateChanged(function(){
+  new Vue({
+    router,
+    store,
+    render: function (h) { return h(App) }
+  }).$mount('#app')
+})

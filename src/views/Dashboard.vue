@@ -2,12 +2,22 @@
   div
     h2 Cargando
     logo-atom
+    a( @click="logout") Salir
 </template>
 <script>
 import LogoAtom from '../components/LogoAtom'
-
+import ButtonAtom from '@/components/ButtonAtom.vue';
+import firebase from 'firebase'
 export default {
-  components: {LogoAtom}
+  components: {
+      LogoAtom,
+      ButtonAtom
+    },
+  methods: {
+    logout () {
+      firebase.auth().signOut().then(() => this.$router.replace('login'));
+    }
+  }
 }
 </script>
 <style scoped lang="scss">

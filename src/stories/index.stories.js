@@ -1,17 +1,15 @@
 import ButtonAtom from  '../components/ButtonAtom.vue'
-
 export default {
+  component: {ButtonAtom},
   title: 'Button',
-}
+};
 
-export const AtomButton = () => ({
+const Template = (args) => ({
   components: { ButtonAtom },
-  template: '<button-atom buttonText="Botón"></button-atom>',
-  
-})
-/*
-export const withSomeEmoji = () => ({
-  components: { MyButton },
-  template: '<my-button>😀 😎 👍 💯</my-button>'
-})
-*/
+  setup() {
+    return { args };
+  },
+  template: '<button-atom buttonText="Boton"><button-atom>',
+});
+export const Primary = Template.bind({});
+Primary.args = {buttonText: 'Nombre',};

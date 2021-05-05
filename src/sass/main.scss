@@ -14,8 +14,6 @@ $font: 'Inter', sans-serif;
     font-size: 1rem;
     font-family: $font;
     transition-duration: 0.2s;
-    width:8rem;
-    height:2.6rem;
 }
 
 @mixin number_colums ($col, $fr) {

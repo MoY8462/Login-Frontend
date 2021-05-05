@@ -12,7 +12,6 @@
 export default {
     inheritAttrs: false,
     props: {
-        title: { type : String, default:""},
         label: { type : String, default:""}
     }
 };
