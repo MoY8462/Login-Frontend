@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div class="py-3">
         <label v-if="label">{{ label }}</label>
         <input
             v-bind="$attrs"
             @input="$emit('input', $event.target.value)"
+            class="p-2"
+            
         />
     </div>
 </template>
@@ -21,11 +23,10 @@ export default {
     div {
         display: grid;
         grid-template-columns: auto;
-        padding: 2rem 2rem;
         font-family: $font;
     }
     input {
-        padding: 0.5rem;
+        padding: 2rem;
         font-family: $font;
     }
 </style>

@@ -1,15 +1,15 @@
 <template lang='pug'>
-    div(class="col")
+    div(class="col flex items-start")
         form(@submit.prevent="restauracion")
             logo-atom(text="Valhalla" subindice="0.1")
             input-text-atom(type="text" label="Correo" v-model="email")
-            div(class="subcol")
-                router-link(to="/login") Ingresar
+            div(class="subcol mt-2")
+                router-link(to="/login" class="subrayado") Ingresar
                 button-atom(buttonText="Enviar" type="submit")
-            div(class="sub")
+            div(class="sub mt-56")
                 unica
                 fi 
-        hero-atom(class="hero")
+        hero-atom(class="hero pt-4 mt-2")
 </template>
 
 <script>
@@ -39,7 +39,7 @@ export default ({
             var auth = firebase.auth();
 
             auth.sendPasswordResetEmail(this.email).then(function() {
-            // Email sent.
+            alert('Correo Enviado')
             }).catch(function() {
             // An error happened.
             });
@@ -50,14 +50,6 @@ export default ({
 <style lang="scss" scoped>
     .col {
         @include number_colums (3,1fr);
-    }
-    div {
-        
-        padding: 0px;
-        margin: 0px;
-    }
-    form {
-        padding: 0.5rem;
     }
     .hero {
         display: grid;
@@ -70,7 +62,7 @@ export default ({
     .subcol {
         @include number_colums (2,1fr);
         @include alig_elements (center,none,row);
-        place-content: space-between;
+        place-content: space-around;
         }
     .sub {
         @include number_colums (2,1fr);
@@ -80,9 +72,15 @@ export default ({
         }
     form {
         background-color: #F7F9FB;
-        padding: 1rem;
+        padding-top: 4rem;
+        padding-right: 3rem;
+        padding-left: 3rem;
+        padding-bottom: 2rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+    .subrayado {
+        text-decoration-line: underline;
     }
 </style>

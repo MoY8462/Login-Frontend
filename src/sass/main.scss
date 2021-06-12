@@ -19,7 +19,6 @@ $font: 'Inter', sans-serif;
 @mixin number_colums ($col, $fr) {
     display: grid;
     grid-template-columns: repeat($col, $fr);
-    grid-gap:1rem;
 }
 
 @mixin alig_elements ($aItem,$jItem,$fDirection) {
