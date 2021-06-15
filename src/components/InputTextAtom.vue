@@ -1,11 +1,12 @@
 <template>
     <div class="py-3">
-        <label v-if="label">{{ label }}</label>
+        <label v-if="label" :class="{'warning': !warn}">{{ label }}</label>
+        
         <input
             v-bind="$attrs"
             @input="$emit('input', $event.target.value)"
             class="p-2"
-            
+            :class="{'warn': !warn}"
         />
     </div>
 </template>
@@ -14,19 +15,21 @@
 export default {
     inheritAttrs: false,
     props: {
-        label: { type : String, default:""}
+        label: { type : String, default:""},
+        warn: {
+            type: Boolean,
+            default: false
+        }
     }
 };
 </script>
 
-<style scope lang="scss">
+<style lang="scss">
     div {
         display: grid;
         grid-template-columns: auto;
-        font-family: $font;
+        font-family: 'Inter', sans-serif;
     }
-    input {
-        padding: 2rem;
-        font-family: $font;
-    }
+    
+    
 </style>

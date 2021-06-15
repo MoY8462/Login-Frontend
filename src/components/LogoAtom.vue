@@ -30,8 +30,8 @@ svg {
 div {
   @include number_colums (1,1fr);
   @include alig_elements (center, center, column);
-  padding: 0px;
-  margin: 0px;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   font-family: $font;
   text-align: center;
   font-size: 2rem;

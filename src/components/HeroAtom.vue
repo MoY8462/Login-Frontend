@@ -8,9 +8,12 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-    img {
-    display:block;
-    @include img_ (60rem, 43rem);
-    }
+<style scoped lang="css">
+img {
+  margin: 0px 0px 0px 0px;
+  padding: 2rem 0px 0px 0px;
+  width: 100vw;
+  height: 100vh;
+}
+
 </style>
