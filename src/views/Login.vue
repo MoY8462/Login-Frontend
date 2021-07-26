@@ -1,67 +1,65 @@
 <template>
-    <div class="grid grid-cols-1 lg:grid-cols-3 cont">
-        <form @submit.prevent="validation">
-            <logo-atom text="Valhalla" subindice="0.1" />
-
-            <label class="pt-2" :class="{'warning': !validate}">
-                Correo 
-                <button id="show-modal" @click="showModal = true" class="boton">
-                    <btn v-if="!validate" color="red"/>
-                    <btn v-if="validate"/>
-                </button> 
-            </label>
-            <modal v-if="showModal" @close="valores()">
-                <h3 slot="header">Correo</h3>
-                <h4 slot="body"> 
-                    Consta del nombre del usuario y el dominio, unidos por un '@'
-                </h4>
-            </modal>
-            <input
-                class="p-2"
-                :class="{'warn': !validate }"
-                v-model="user.email"
-                type="email"
-            />
-            <label class="pt-2" :class="{'warning': !validate}">
-                Contraseña
-                <button id="show-modal-pass" type="button" @click="showModalPass = true" class="boton">
-                    <btn v-if="!validate" color="red"/>
-                    <btn v-if="validate"/>
-                </button> 
-            </label>
-            <modal v-if="showModalPass" @close="valores()">
-                <h3 slot="header">Contraseña</h3>
-                <h4 slot="body"> 
-                    <li>Minimo 8 caracteres y máximo 15</li>
-                    <li>Al menos una letra mayúscula</li>
-                    <li>Al menos una letra minucula</li>
-                    <li>No espacios en blanco</li>
-                    <li>Al menos 1 caracter especial</li>
-                </h4>
-            </modal>
-            <input
-                class="p-2"
-                :class="{'warn': !validate}"
-                v-model="user.password"
-                type="email"
-            />
-            <!--
-            <input-text-atom type="password" label="Contraseña" v-model="user.password" :warn=validate />-->
-            <div class="subcol pb-3">
-                <router-link to="/forgot" class="subrayado">Recuperar Contraseña</router-link>
-                <button-atom buttonText="Ingresar" type="submit" class="btn short" />
-            </div>
-            <line-atom/>
-            <button v-on:click="loginGoogle" class="btn large mt-6 lg:mt-5">Ingresar con Google</button>
-            <div class="sub mt-4">
-                <unica/>
-                <fi/>
-            </div>
-        </form>
-        <div class="flex hero">
-            <div class="hidden lg:block" >
-                <hero-atom />
-            </div>
+    <div class="contenedor">
+        <section class="form__container">
+            <form @submit.prevent="validation">
+                <logo-atom text="Valhalla" subindice="0.1" />
+                <label class="form__container-label" for="">
+                    <span :class="{'warning': !validate}">Correo</span>
+                    <input
+                        class="p-2"
+                        :class="{'warn': !validate, 'alive': validate }"
+                        v-model="user.email"
+                        placeholder="ejemplo@dominio.com"
+                        type="email"
+                    />
+                </label>
+                <label class="form__container-password" for="">
+                    <div class="password__div">
+                        <span class="password__div-title" :class="{'warning': !validate}">Contraseña</span>
+                        <span class="password__div-icon">
+                            <ul>
+                                <li>Debe de contener 8 carácteres</li>
+                                <li>Debe contener por lo menos una mayúscula</li>
+                            </ul>
+                        </span>
+                        
+                    </div>
+                    
+                    <div class="label-div" :class="{'warn': !validate, 'alive': validate}">
+                        <input
+                            class="label-div-input"
+                            
+                            v-model="user.password"
+                            type="password"
+                            placeholder="*********"
+                            id="password"
+                        />
+                        <button v-on:click="estado" :class="{'view': !action,'visibility': action}"></button>
+                    </div>
+                    
+                    
+                </label>
+                
+                <section class="form__container-section">
+                    <router-link to="/forgot" class="underline">Recuperar Contraseña</router-link>
+                    <button-atom buttonText="Ingresar" type="submit" class="btn short" />
+                </section>
+                <line-atom/>
+                <button v-on:click="loginGoogle" class="form__container-button">Ingresar con Google  <span></span></button>
+                
+                <div class="form__container-div">
+                    <section>
+                        <img src="../assets/image3.svg" alt="">
+                    </section>
+                    <section>
+                        <img src="../assets/image2.svg" alt="">
+                    </section>
+                </div>
+            </form>
+        </section>
+        
+        <div class="img__container">
+            
         </div>
         
     </div>
@@ -71,11 +69,6 @@
 <script>
 import ButtonAtom from '@/components/ButtonAtom.vue';
 import LogoAtom from '../components/LogoAtom';
-import HeroAtom from '@/components/HeroAtom.vue';
-import Fi from '@/components/FI_Logo.vue';
-import Modal from '@/components/Modal.vue';
-import Btn from '@/components/BtnIcon.vue';
-import Unica from '@/components/UNICA_Logo.vue';
 import LineAtom from '@/components/LineAtom.vue';
 import firebase from 'firebase/app';
 import 'firebase/database'; // If using Firebase database
@@ -84,12 +77,7 @@ export default ({
     components: { 
         ButtonAtom,
         LogoAtom, 
-        HeroAtom,
-        Fi,
-        Unica,
         LineAtom,
-        Modal,
-        Btn
     },
     data () {
         return {
@@ -99,8 +87,7 @@ export default ({
             },
             errors: [],
             validate: true,
-            showModal: false,
-            showModalPass: false
+            action: false,
         }
     },
     
@@ -161,43 +148,26 @@ export default ({
             this.validate = true;
             this.showModal = false;
             this.showModalPass = false;
+        },
+        estado: function () {
+            const passwordField = document.querySelector('#password')
+            if (passwordField.getAttribute('type') === 'password') 
+            {
+                passwordField.setAttribute('type', 'text');
+                this.action=true;
+            }
+            else 
+            {
+                passwordField.setAttribute('type', 'password');
+                this.action=false;
+            }
         }
     }
 
 })
 </script>
-<style lang="scss" scoped>
-    
-    .hero {
-        display: grid;
-        grid-column: span 2 / span 2;
-    }
-    form {
-        background-color: #F7F9FB;
-        padding: 5rem 4rem 4rem 3rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .subcol {
-        @include number_colums (2,1fr);
-        @include alig_elements (center,none,row);
-        place-content: space-between;
-        margin-top: 1rem;
-        }
+<style>
     
     
-    .sub {
-        @include number_colums (2,1fr);
-        @include alig_elements (center,none,row);
-        place-content: center;
-        padding-top: 2rem;
-        }
-    
-    
-    
-    .subrayado {
-        text-decoration-line: underline;
-    }
   
 </style>

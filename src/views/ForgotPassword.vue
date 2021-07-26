@@ -1,37 +1,55 @@
-<template lang='pug'>
-    div(class="col flex items-start")
-        form(@submit.prevent="restauracion")
-            logo-atom(text="Valhalla" subindice="0.1")
-            input-text-atom(type="text" label="Correo" v-model="email")
-            div(class="subcol mt-2")
-                router-link(to="/login" class="subrayado") Ingresar
-                button-atom(buttonText="Enviar" type="submit")
-            div(class="sub mt-56")
-                unica
-                fi 
-        hero-atom(class="hero pt-4 mt-2")
+<template>
+    <div class="contenedor">
+        <section class="form__container">
+            <form @submit.prevent="restauracion">
+                <logo-atom text="Valhalla" subindice="0.1" />
+                <label class="form__container-label" for="">
+                    <span :class="{'warning': !validate}">Correo</span>
+                    <input
+                        class="p-2"
+                        :class="{'warn': !validate, 'alive': validate }"
+                        v-model="email"
+                        placeholder="ejemplo@dominio.com"
+                        type="email"
+                    />
+                </label>
+                
+                <div class="form__container-div" >
+                    <section class="form__container-div-forgot">
+                        <router-link to="/login" class="underline">Ingresar </router-link>
+                    </section>
+                    <section>
+                        <button type="submit" class="form__container-button">Enviar </button>
+                    </section>
+                </div>
+                
+                
+                <div class="form__container-div">
+                    <section>
+                        <img src="../assets/image3.svg" alt="">
+                    </section>
+                    <section>
+                        <img src="../assets/image2.svg" alt="">
+                    </section>
+                </div>
+            </form>
+        </section>
+        <div class="img__container">
+        </div>
+    </div>
 </template>
 
 <script>
-import ButtonAtom from '@/components/ButtonAtom.vue'
-import InputTextAtom from '@/components/InputTextAtom.vue'
 import LogoAtom from '../components/LogoAtom'
-import HeroAtom from '@/components/HeroAtom.vue'
-import Fi from '@/components/FI_Logo.vue';
-import Unica from '@/components/UNICA_Logo.vue';
 import firebase from 'firebase'
 export default ({
     components: { 
-        ButtonAtom,
-        InputTextAtom, 
         LogoAtom, 
-        HeroAtom,
-        Fi,
-        Unica
     },
     data () {
         return {
-            email: ''
+            email: '',
+            validate: true,
         }
     },
     methods: {
@@ -41,7 +59,7 @@ export default ({
             auth.sendPasswordResetEmail(this.email).then(function() {
             alert('Correo Enviado')
             }).catch(function() {
-            // An error happened.
+                this.validate=false;
             });
         }
     }
